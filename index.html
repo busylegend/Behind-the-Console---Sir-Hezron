@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Behind the Console - Sir Hezron</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI";
+  background: #f5f5f7;
+  color: #111;
+}
+
+/* LOGIN */
+#login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.box {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  width: 280px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #6c5ce7;
+  color: white;
+  cursor: pointer;
+}
+
+/* APP */
+#app {
+  display: none;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+h2 {
+  text-align: center;
+}
+
+.small {
+  font-size: 13px;
+  color: gray;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="box">
+    <h2>🎛️ Behind the Console</h2>
+    <p class="small">Sir Hezron Private Access</p>
+
+    <input type="password" id="pass" placeholder="Enter Password">
+    <button onclick="login()">Enter</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+
+  <h2>Welcome Sir Hezron</h2>
+  <p class="small" id="msg"></p>
+
+  <div class="card">
+    <h3>📖 Daily Verse</h3>
+    <p id="verse"></p>
+  </div>
+
+  <div class="card">
+    <h3>📝 Journal</h3>
+    <textarea id="journal"></textarea>
+    <button onclick="save('journal')">Save</button>
+  </div>
+
+  <div class="card">
+    <h3>🎯 Dream Board</h3>
+    <textarea id="dream"></textarea>
+    <button onclick="save('dream')">Save</button>
+  </div>
+
+  <div class="card">
+    <h3>💌 Letter to Future Me</h3>
+    <textarea id="letter"></textarea>
+    <button onclick="save('letter')">Save</button>
+  </div>
+
+  <div class="card">
+    <h3>🏆 Wins Tracker</h3>
+    <input id="win" placeholder="Add win">
+    <button onclick="save('win')">Add</button>
+  </div>
+
+</div>
+
+<script>
+const PASSWORD = "hezron2026";
+
+/* LOGIN */
+function login(){
+  let p = document.getElementById("pass").value;
+  if(p === PASSWORD){
+    document.getElementById("login").style.display = "none";
+    document.getElementById("app").style.display = "block";
+
+    welcome();
+    verse();
+  } else {
+    alert("Wrong password");
+  }
+}
+
+/* WELCOME MESSAGE */
+function welcome(){
+  const msgs = [
+    "Your journey is just beginning.",
+    "Stay consistent, stay grounded.",
+    "You are building something meaningful.",
+    "Growth takes time."
+  ];
+
+  document.getElementById("msg").innerText =
+    msgs[Math.floor(Math.random()*msgs.length)];
+}
+
+/* DAILY VERSE (stable per day) */
+function verse(){
+  const verses = [
+    "Jeremiah 29:11 — I know the plans I have for you.",
+    "Philippians 4:13 — You can do all things through Christ.",
+    "Psalm 23:1 — The Lord is my shepherd.",
+    "Proverbs 3:5 — Trust in the Lord."
+  ];
+
+  let day = new Date().toDateString();
+  let hash = 0;
+
+  for(let i=0;i<day.length;i++){
+    hash = day.charCodeAt(i) + ((hash<<5)-hash);
+  }
+
+  document.getElementById("verse").innerText =
+    verses[Math.abs(hash) % verses.length];
+}
+
+/* SAVE (simple local storage) */
+function save(id){
+  let value = document.getElementById(id).value;
+
+  if(!value){
+    alert("Write something first");
+    return;
+  }
+
+  localStorage.setItem(id, value);
+  alert("Saved ✔");
+}
+</script>
+
+</body>
+</html>
