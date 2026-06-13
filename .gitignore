@@ -1,15 +1,9 @@
-// Firebase Config - CORRECT VERSION
 const firebaseConfig = {
-    apiKey: "AIzaSyAomaVo7BNvg9q_HoPckAUYVe2hyhTijM",
-    authDomain: "behind-the-console-sir-hezron.firebaseapp.com",
-    projectId: "behind-the-console-sir-hezron",
-    storageBucket: "behind-the-console-sir-hezron.firebasestorage.app",
-    messagingSenderId: "1031106221705",
-    appId: "1:1031106221705:web:49b1c7f32ce4b4d3d858",
-    measurementId: "G-VYNDTVQM25"
+  apiKey: "AIzaSyAomaVo7BNvg9q_HoPckAUYVe2hyhTijM",
+  authDomain: "behind-the-console-sir-hezron.firebaseapp.com",
+  projectId: "behind-the-console-sir-hezron",
+  storageBucket: "behind-the-console-sir-hezron.firebasestorage.app",
+  messagingSenderId: "1031106221705",
+  appId: "1:1031106221705:web:49b1c7f32ce4b4d3d858",
+  measurementId: "G-VYNDTVQM25"
 };
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const storage = firebase.storage();
